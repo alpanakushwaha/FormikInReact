@@ -12,13 +12,35 @@ const onSubmit = (values) => {
   console.log("Form data", values);
 };
 
+const validate = (values) => {
+  //values.name values.email values.channel
+  //errors.name errors.email errors.channel
+  // errors.name='This field is required'
+
+  let errors = {};
+  if (!values.name) {
+    errors.name = "Required";
+  }
+  if (!values.email) {
+    errors.email = "Required";
+  } else if (
+    !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\.[A-Z]{2,4}$/i.test(values.email)
+  ) {
+    errors.email = "Invalid email format";
+  }
+  if (!values.channel) {
+    errors.channel = "Required";
+  }
+  return errors;
+};
+
 const validationSchema = Yup.object({
   name: Yup.string().required("Required!"),
   email: Yup.string().email("Invalid email format").required("Required!"),
   channel: Yup.string().required("Required!"),
 });
 
-function YoutubeForm() {
+function OldYoutubeForm() {
   const formik = useFormik({
     initialValues,
     onSubmit,
@@ -38,7 +60,9 @@ function YoutubeForm() {
             type="text"
             id="name"
             name="name"
-          {...formik.getFieldProps("name")}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.name}
           />
 
           {formik.touched.name && formik.errors.name ? (
@@ -52,8 +76,9 @@ function YoutubeForm() {
             type="text"
             id="email"
             name="email"
-            {...formik.getFieldProps("email")}
-
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.email}
           />
           {formik.touched.email && formik.errors.email ? (
             <div className="error">{formik.errors.email}</div>
@@ -65,8 +90,9 @@ function YoutubeForm() {
             type="text"
             id="channel"
             name="channel"
-            {...formik.getFieldProps("channel")}
-
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.channel}
           />
           {formik.touched.channel && formik.errors.channel ? (
             <div className="error">{formik.errors.channel}</div>
@@ -77,4 +103,4 @@ function YoutubeForm() {
     </div>
   );
 }
-export default YoutubeForm;
+export default OldYoutubeForm;
