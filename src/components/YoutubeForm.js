@@ -41,7 +41,9 @@ function YoutubeForm() {
         <div className="form-control">
           <label htmlFor="email">E-mail</label>
           <Field type="text" id="email" name="email" />
-          <ErrorMessage name="email" component={TextError} />
+          <ErrorMessage name="email">
+            {(errorMsg) => <div className="error">{errorMsg}</div>}
+          </ErrorMessage>
         </div>
         <div className="form-control">
           <label htmlFor="channel">Channel</label>
@@ -51,7 +53,8 @@ function YoutubeForm() {
             name="channel"
             placeholder="Youtube channel name"
           />
-          <ErrorMessage name="channel" component={TextError} />
+          {(errorMsg) => <div className="error">{errorMsg}</div>}
+          <ErrorMessage name="channel"></ErrorMessage>
         </div>
 
         <div className="form-control">
