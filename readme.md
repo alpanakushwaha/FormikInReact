@@ -25,3 +25,5 @@ the above code can be replaced by
 - Form
 - Field
 - ErrorMessage
+
+* 'as' prop can also be written as 'component' for 'type' of input-tag in html written in React/Formik
