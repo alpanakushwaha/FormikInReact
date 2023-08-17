@@ -9,6 +9,7 @@ const initialValues = {
   channel: "",
   comments: "",
   address: "",
+  social: { facebook: "", twitter: "" },
 };
 
 const onSubmit = (values) => {
@@ -53,8 +54,9 @@ function YoutubeForm() {
             name="channel"
             placeholder="Youtube channel name"
           />
-          {(errorMsg) => <div className="error">{errorMsg}</div>}
-          <ErrorMessage name="channel"></ErrorMessage>
+          <ErrorMessage name="channel">
+            {(errorMsg) => <div className="error">{errorMsg}</div>}
+          </ErrorMessage>
         </div>
 
         <div className="form-control">
@@ -66,7 +68,7 @@ function YoutubeForm() {
           <Field name="address">
             {(props) => {
               const { field, form, meta } = props;
-              console.log("Render Props", props);
+              // console.log("Render Props", props);
               return (
                 <div>
                   <input type="text" id="address" {...field} />
@@ -76,7 +78,14 @@ function YoutubeForm() {
             }}
           </Field>
         </div>
-
+        <div className="form-control">
+          <label htmlFor="facebook">Facebook profile</label>
+          <Field type="text" id="facebook" name="social.facebook"></Field>
+        </div>
+        <div className="form-control">
+          <label htmlFor="Twitter">Twitter profile</label>
+          <Field id="twitter" name="social.twitter" type="text"></Field>
+        </div>
         <button type="submit">Submit</button>
       </Form>
     </Formik>
