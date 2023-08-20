@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Formik,
   Form,
@@ -16,6 +16,16 @@ const initialValues = {
   channel: "",
   comments: "",
   address: "",
+  social: { facebook: "", twitter: "" },
+  phoneNumbers: ["", ""],
+  phNumbers: [""],
+};
+const savedValues = {
+  name: "alpana",
+  email: "alpana@gmail.com",
+  channel: "channelName567891",
+  comments: "comments to be added",
+  address: "address1237890",
   social: { facebook: "", twitter: "" },
   phoneNumbers: ["", ""],
   phNumbers: [""],
@@ -47,12 +57,15 @@ function YoutubeForm() {
   // console.log("Form errors", formik.errors);
   // console.log("Visited Fields", formik.touched);
 
+  const [formValues, setformValues] = useState(null);
+
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={formValues || initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
-      validateOnMount
+      enableReinitialize
+      // validateOnMount
     >
       {(formik) => {
         console.log("Formik props", formik);
@@ -190,6 +203,11 @@ function YoutubeForm() {
             >
               Visit Fields
             </button>
+
+            <button type="button" onClick={() => setFormValues(savedValues)}>
+              Load saved data
+            </button>
+
             <button
               type="submit"
               disabled={!formik.isValid || formik.isSubmitting}
