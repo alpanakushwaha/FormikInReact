@@ -11,9 +11,9 @@ import * as Yup from "yup";
 import TextError from "./TextError";
 
 const initialValues = {
-  name: "",
-  email: "",
-  channel: "",
+  name: "Alpana",
+  email: "a@gmail.com",
+  channel: "asdf",
   comments: "",
   address: "",
   social: { facebook: "", twitter: "" },
@@ -50,6 +50,7 @@ function YoutubeForm() {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
+      validateOnMount
     >
       {(formik) => {
         console.log("Formik props", formik);
@@ -187,7 +188,9 @@ function YoutubeForm() {
             >
               Visit Fields
             </button>
-            <button type="submit">Submit</button>
+            <button type="submit" disabled={!(formik.isValid && formik.dirty)}>
+              Submit
+            </button>
           </Form>
         );
       }}
