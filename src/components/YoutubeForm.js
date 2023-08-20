@@ -11,9 +11,9 @@ import * as Yup from "yup";
 import TextError from "./TextError";
 
 const initialValues = {
-  name: "Alpana",
-  email: "a@gmail.com",
-  channel: "asdf",
+  name: "",
+  email: "",
+  channel: "",
   comments: "",
   address: "",
   social: { facebook: "", twitter: "" },
@@ -21,8 +21,10 @@ const initialValues = {
   phNumbers: [""],
 };
 
-const onSubmit = (values) => {
+const onSubmit = (values, onSubmitProps) => {
   console.log("Form data", values);
+  console.log("submit props", onSubmitProps);
+  onSubmitProps.setSubmitting(false);
 };
 
 const validationSchema = Yup.object({
@@ -188,7 +190,10 @@ function YoutubeForm() {
             >
               Visit Fields
             </button>
-            <button type="submit" disabled={!(formik.isValid && formik.dirty)}>
+            <button
+              type="submit"
+              disabled={!formik.isValid || formik.isSubmitting}
+            >
               Submit
             </button>
           </Form>
