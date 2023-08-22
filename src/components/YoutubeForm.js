@@ -35,6 +35,7 @@ const onSubmit = (values, onSubmitProps) => {
   console.log("Form data", values);
   console.log("submit props", onSubmitProps);
   onSubmitProps.setSubmitting(false);
+  onSubmitProps.resetForm();
 };
 
 const validationSchema = Yup.object({
@@ -84,6 +85,7 @@ function YoutubeForm() {
                 {(errorMsg) => <div className="error">{errorMsg}</div>}
               </ErrorMessage>
             </div>
+
             <div className="form-control">
               <label htmlFor="channel">Channel</label>
               <Field
@@ -107,6 +109,7 @@ function YoutubeForm() {
               />
               <ErrorMessage name="comments" component={TextError} />
             </div>
+
             <div className="form-control">
               <label htmlFor="address">Address</label>
               <FastField name="address">
@@ -125,18 +128,22 @@ function YoutubeForm() {
                 }}
               </FastField>
             </div>
+
             <div className="form-control">
               <label htmlFor="facebook">Facebook profile</label>
               <Field type="text" id="facebook" name="social.facebook"></Field>
             </div>
+
             <div className="form-control">
               <label htmlFor="Twitter">Twitter profile</label>
               <Field id="twitter" name="social.twitter" type="text"></Field>
             </div>
+
             <div className="form-control">
               <label htmlFor="primaryPh">Primary Phone Number</label>
               <Field id="primaryPh" name="phoneNumbers[0]" type="text"></Field>
             </div>
+
             <div className="form-control">
               <label htmlFor="secondaryPh">Secondary Phone Number</label>
               <Field
@@ -145,6 +152,7 @@ function YoutubeForm() {
                 type="text"
               ></Field>
             </div>
+
             <div className="form-control">
               <label>List of Phone Numbers</label>
               <FieldArray name="phNumbers">
@@ -175,21 +183,25 @@ function YoutubeForm() {
                 }}
               </FieldArray>
             </div>
+
             <button
               type="button"
               onClick={() => formik.validateField("comments")}
             >
               Validate Comments
             </button>
+
             <button type="button" onClick={() => formik.validateForm()}>
               Validate all
             </button>
+
             <button
               type="button"
               onClick={() => formik.setFieldTouched("comments")}
             >
               Visit Comments
             </button>
+
             <button
               type="button"
               onClick={() =>
@@ -207,6 +219,8 @@ function YoutubeForm() {
             <button type="button" onClick={() => setFormValues(savedValues)}>
               Load saved data
             </button>
+
+            <button type="reset">Reset</button>
 
             <button
               type="submit"
